@@ -7,9 +7,8 @@ and diagnostic JavaScript dispatch.
 
 from __future__ import annotations
 
-import time
 import pytest
-from selenium.common.exceptions import ElementClickInterceptedException, TimeoutException
+from selenium.common.exceptions import ElementClickInterceptedException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 

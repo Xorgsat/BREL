@@ -31,11 +31,11 @@ jobs:
           python-version: '3.12'
 
       - name: Install uv package manager
-        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh && echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      - name: Install dependencies
+      - name: Install Python dependencies
         run: |
-          uv venv
+          uv venv --python 3.12
           uv pip install -e ".[dev]"
 
       - name: Set up Chrome browser
@@ -51,14 +51,10 @@ jobs:
           firefox-version: latest
 
       - name: Run Smoke Tests on ${{ matrix.browser }}
-        run: |
-          source .venv/bin/activate
-          pytest selenium-lab/tests/test_smoke_foundation.py -v --browser ${{ matrix.browser }} --headless
+        run: uv run pytest selenium-lab/tests/test_smoke_foundation.py -v --browser ${{ matrix.browser }} --headless
 
       - name: Run Browser Compatibility Experiments on ${{ matrix.browser }}
-        run: |
-          source .venv/bin/activate
-          pytest experiments/browser_compatibility/test_exp14_browser_compatibility.py -v --browser ${{ matrix.browser }} --headless
+        run: uv run pytest experiments/browser_compatibility/test_exp14_browser_compatibility.py -v --browser ${{ matrix.browser }} --headless --continue-on-collection-errors
 
       - name: Upload Diagnostics on Failure
         if: failure()

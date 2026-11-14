@@ -91,12 +91,12 @@ def main():
     run_id = manifest["run_id"]
     report_path = Path("reports/reliability") / f"{run_id}_summary.md"
     ReportGenerator.generate_markdown_report(manifest, report_path)
-    print(f"\n=======================================================")
+    print("\n=======================================================")
     print(f"Report generated: {report_path}")
     print(f"Verdict: {manifest['analysis']['verdict']}")
     print(f"First-Attempt Pass Rate: {manifest['metrics']['first_attempt_pass_rate_pct']}%")
     print(f"Median Latency (P50): {manifest['metrics']['latency']['median_ms']} ms")
-    print(f"=======================================================\n")
+    print("=======================================================\n")
 
 
 if __name__ == "__main__":

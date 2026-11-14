@@ -48,7 +48,7 @@ def run_benchmark(target: str, workers: int) -> dict:
 
 def main():
     target = "experiments/concurrency/test_parallel_isolation.py"
-    print(f"=== BREL Parallel Execution Benchmark ===")
+    print("=== BREL Parallel Execution Benchmark ===")
     print(f"Target: {target}\n")
 
     results = []
@@ -96,9 +96,9 @@ def main():
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(md, encoding="utf-8")
 
-    print(f"\n=======================================================")
+    print("\n=======================================================")
     print(f"Benchmark Report written to: {report_path}")
-    print(f"=======================================================\n")
+    print("=======================================================\n")
     print(md)
 
 

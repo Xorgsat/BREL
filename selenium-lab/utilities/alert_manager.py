@@ -8,7 +8,7 @@ from __future__ import annotations
 import logging
 from typing import Optional
 
-from selenium.common.exceptions import NoAlertPresentException, TimeoutException
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions as EC

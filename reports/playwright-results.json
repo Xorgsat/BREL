@@ -1,0 +1,542 @@
+{
+  "config": {
+    "argv": [
+      "/Users/satyam/.local/share/fnm/node-versions/v26.13.0/installation/bin/node",
+      "/Users/satyam/Documents/BREL/node_modules/.bin/playwright",
+      "test"
+    ],
+    "configFile": "/Users/satyam/Documents/BREL/playwright.config.ts",
+    "rootDir": "/Users/satyam/Documents/BREL/playwright-lab/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 2
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/satyam/Documents/BREL/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/satyam/Documents/BREL/playwright-lab/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/Users/satyam/Documents/BREL/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "name": "chromium",
+        "testDir": "/Users/satyam/Documents/BREL/playwright-lab/tests",
+        "snapshotDir": "/Users/satyam/Documents/BREL/playwright-lab/tests",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 30000,
+        "use": {
+          "baseURL": "http://127.0.0.1:8000",
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "video": "retain-on-failure",
+          "ignoreHTTPSErrors": true,
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/159.0.8154.6 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "chromium"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "reports/playwright-results.json"
+        }
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "reports/playwright-report",
+          "open": "never"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.1",
+    "workers": 2,
+    "webServer": {
+      "command": ".venv/bin/python -m uvicorn controlled_app.app.main:app --host 127.0.0.1 --port 8000",
+      "port": 8000,
+      "reuseExistingServer": true,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "exp_contexts_isolation.spec.ts",
+      "file": "exp_contexts_isolation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Comparative Architecture: Browser Context Isolation",
+          "file": "exp_contexts_isolation.spec.ts",
+          "line": 8,
+          "column": 6,
+          "specs": [
+            {
+              "title": "BrowserContext ephemeral isolation speed benchmark",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 483,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Average BrowserContext creation + navigation time: 63.0ms\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-14T15:32:02.641Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d36a012f9cc0af77bb23-af59f2b1479c44dc4c35",
+              "file": "exp_contexts_isolation.spec.ts",
+              "line": 9,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "exp01_dynamic_dom.spec.ts",
+      "file": "exp01_dynamic_dom.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "EXP-01 Comparative: Dynamic DOM",
+          "file": "exp01_dynamic_dom.spec.ts",
+          "line": 7,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Playwright auto-waiting on dynamically injected element",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1599,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-14T15:32:02.638Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "aeb2afd455e6dc4ae290-141cc96ae3f5c32213da",
+              "file": "exp01_dynamic_dom.spec.ts",
+              "line": 8,
+              "column": 3
+            },
+            {
+              "title": "Public App: Dynamic Loading absent DOM element auto-waiting",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7713,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-14T15:32:03.297Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "aeb2afd455e6dc4ae290-ad20cacadacf382f507d",
+              "file": "exp01_dynamic_dom.spec.ts",
+              "line": 26,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "exp02_autowait.spec.ts",
+      "file": "exp02_autowait.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "EXP-02 Comparative: Auto-waiting and Web-first Assertions",
+          "file": "exp02_autowait.spec.ts",
+          "line": 8,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Auto-wait on delayed actionability in dynamic controls",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 5646,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-14T15:32:04.414Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4f9fa9291993fdb245cb-198e522e639a08ee1db7",
+              "file": "exp02_autowait.spec.ts",
+              "line": 9,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "exp03_locator_reevaluation.spec.ts",
+      "file": "exp03_locator_reevaluation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "EXP-03 Comparative: Locator Re-evaluation vs Stale References",
+          "file": "exp03_locator_reevaluation.spec.ts",
+          "line": 8,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Playwright locator remains valid across DOM node replacement",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 918,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-14T15:32:10.068Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "15867fd17625d9aa5a39-e6d163102df70649c292",
+              "file": "exp03_locator_reevaluation.spec.ts",
+              "line": 9,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "exp04_actionability.spec.ts",
+      "file": "exp04_actionability.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "EXP-04 Comparative: Actionability & Overlays",
+          "file": "exp04_actionability.spec.ts",
+          "line": 8,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Playwright auto-waits for overlay to disappear before clicking",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1488,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-14T15:32:10.992Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3a7de8ba8eef643380f8-7d3fda7ba615c3d2e3cf",
+              "file": "exp04_actionability.spec.ts",
+              "line": 9,
+              "column": 3
+            },
+            {
+              "title": "Diagnostic contrast: force click vs DOM evaluate click",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 142,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-14T15:32:11.017Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3a7de8ba8eef643380f8-177bed4b0c8e40f0c965",
+              "file": "exp04_actionability.spec.ts",
+              "line": 20,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "exp06_shadow_dom.spec.ts",
+      "file": "exp06_shadow_dom.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "EXP-06 Comparative: Shadow DOM",
+          "file": "exp06_shadow_dom.spec.ts",
+          "line": 8,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Playwright CSS locators pierce open shadow roots transparently",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 111,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-14T15:32:11.164Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "754532344810bf1a4dfb-7b6420219bebc7a703c9",
+              "file": "exp06_shadow_dom.spec.ts",
+              "line": 9,
+              "column": 3
+            },
+            {
+              "title": "Public App: UITAP Shadow DOM piercing without manual root navigation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1701,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-14T15:32:11.279Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "754532344810bf1a4dfb-bfc9a0e12416c0555758",
+              "file": "exp06_shadow_dom.spec.ts",
+              "line": 21,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-14T15:32:02.109Z",
+    "duration": 10896.177000000001,
+    "expected": 9,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

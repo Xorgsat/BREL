@@ -1,6 +1,6 @@
 {
   "name": "brel-playwright-comparative-lab",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Comparative Playwright Test Lab for Browser Reliability Engineering Lab",
   "private": true,
   "scripts": {

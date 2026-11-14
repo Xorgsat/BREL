@@ -6,12 +6,10 @@ Ensures zero cookie leakage, storage contamination, or download collision.
 
 from __future__ import annotations
 
-import os
 from pathlib import Path
 import time
 import uuid
 import pytest
-from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 
 from selenium_lab.utilities.file_manager import FileManager

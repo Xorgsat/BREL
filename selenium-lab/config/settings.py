@@ -7,7 +7,6 @@ from __future__ import annotations
 
 import os
 from pathlib import Path
-from pydantic import Field
 # Base project directory
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 

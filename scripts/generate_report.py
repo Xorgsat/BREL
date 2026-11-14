@@ -9,14 +9,12 @@ Compiles execution artifacts, metrics, and failure taxonomy into comprehensive e
 from __future__ import annotations
 
 from datetime import datetime, timezone
-import json
 from pathlib import Path
 import sys
 
 # Ensure root is in sys.path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from reliability_engine.failure_classifier import FailureCategory
 
 
 def generate_reliability_summary(output_dir: Path) -> Path:

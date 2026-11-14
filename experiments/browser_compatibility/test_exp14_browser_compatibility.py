@@ -6,7 +6,6 @@ and engine identification (Chromium, Gecko, WebKit).
 
 from __future__ import annotations
 
-import platform
 import pytest
 from selenium.webdriver.remote.webdriver import WebDriver
 

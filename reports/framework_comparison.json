@@ -1,0 +1,238 @@
+{
+  "report_id": "COMP_20261114_153139",
+  "generated_at_utc": "2026-11-14T15:31:39.688720+00:00",
+  "total_scenarios_compared": 6,
+  "selenium_total_duration_ms": 5586.21,
+  "playwright_total_duration_ms": 10496.0,
+  "aggregate_speedup_ratio": 0.53,
+  "comparisons": [
+    {
+      "experiment_id": "EXP-01",
+      "scenario_title": "Dynamic DOM Injection & Rendering",
+      "selenium": {
+        "framework": "Selenium WebDriver",
+        "experiment_id": "EXP-01",
+        "test_name": "test_dynamic_injected_element_selenium",
+        "status": "failed",
+        "duration_ms": 675.04,
+        "synchronization_mechanism": "Explicit Wait (WaitManager.wait_for_presence)",
+        "actionability_handling": "Pre-check presence before visibility assertion",
+        "diagnostics_captured": [
+          "Screenshot",
+          "DOM Snapshot",
+          "Browser Logs",
+          "Execution Metadata"
+        ],
+        "isolation_type": "Process-level (Clean WebDriver instance per test)"
+      },
+      "playwright": {
+        "framework": "Playwright Test",
+        "experiment_id": "EXP-01",
+        "test_name": "Playwright auto-waiting on dynamically injected element",
+        "status": "passed",
+        "duration_ms": 1664.0,
+        "synchronization_mechanism": "Implicit Auto-Wait on .locator() action",
+        "actionability_handling": "Built-in actionability check prior to assertion",
+        "diagnostics_captured": [
+          "PW Trace (ZIP)",
+          "Failure Screenshot",
+          "Video recording"
+        ],
+        "isolation_type": "Context-level (Ephemeral BrowserContext)"
+      },
+      "latency_delta_ms": 988.96,
+      "faster_framework": "Selenium",
+      "architectural_contrast": "Selenium requires explicit polling loop over WebDriver JSON-RPC; Playwright listens to DevTools protocol DOM mutation events directly."
+    },
+    {
+      "experiment_id": "EXP-02",
+      "scenario_title": "Asynchronous State Transitions & Actionability",
+      "selenium": {
+        "framework": "Selenium WebDriver",
+        "experiment_id": "EXP-02",
+        "test_name": "test_dynamic_controls_element_state_transition",
+        "status": "failed",
+        "duration_ms": 729.19,
+        "synchronization_mechanism": "Explicit wait_for_element_to_be_clickable",
+        "actionability_handling": "Explicit wait until element is enabled & displayed",
+        "diagnostics_captured": [
+          "Screenshot",
+          "DOM Snapshot",
+          "Browser Logs",
+          "Execution Metadata"
+        ],
+        "isolation_type": "Process-level (Clean WebDriver instance per test)"
+      },
+      "playwright": {
+        "framework": "Playwright Test",
+        "experiment_id": "EXP-02",
+        "test_name": "Auto-wait on delayed actionability in dynamic controls",
+        "status": "passed",
+        "duration_ms": 5751.0,
+        "synchronization_mechanism": "Web-first assertion expect(locator).toBeEnabled()",
+        "actionability_handling": "Engine polls until element passes actionability checks",
+        "diagnostics_captured": [
+          "PW Trace (ZIP)",
+          "Failure Screenshot",
+          "Video recording"
+        ],
+        "isolation_type": "Context-level (Ephemeral BrowserContext)"
+      },
+      "latency_delta_ms": 5021.81,
+      "faster_framework": "Selenium",
+      "architectural_contrast": "Selenium throws ElementNotInteractableException if unready; Playwright auto-waits with configurable action timeout."
+    },
+    {
+      "experiment_id": "EXP-03",
+      "scenario_title": "DOM Node Replacement & Stale Reference Resilience",
+      "selenium": {
+        "framework": "Selenium WebDriver",
+        "experiment_id": "EXP-03",
+        "test_name": "test_stale_element_remedied_by_staleness_of",
+        "status": "failed",
+        "duration_ms": 725.02,
+        "synchronization_mechanism": "Two-phase: wait_for_staleness then re-lookup element",
+        "actionability_handling": "Cached RemoteWebElement reference permanently invalidated (StaleElementReferenceException)",
+        "diagnostics_captured": [
+          "Screenshot",
+          "DOM Snapshot",
+          "Browser Logs",
+          "Execution Metadata"
+        ],
+        "isolation_type": "Process-level (Clean WebDriver instance per test)"
+      },
+      "playwright": {
+        "framework": "Playwright Test",
+        "experiment_id": "EXP-03",
+        "test_name": "Playwright locator remains valid across DOM node replacement",
+        "status": "passed",
+        "duration_ms": 976.0,
+        "synchronization_mechanism": "Lazy locator automatically resolves fresh DOM node",
+        "actionability_handling": "Locators are query recipes re-evaluated at action time",
+        "diagnostics_captured": [
+          "PW Trace (ZIP)",
+          "Failure Screenshot",
+          "Video recording"
+        ],
+        "isolation_type": "Context-level (Ephemeral BrowserContext)"
+      },
+      "latency_delta_ms": 250.98,
+      "faster_framework": "Selenium",
+      "architectural_contrast": "Selenium binds to a single remote element ID at query time; Playwright locators are lazily re-evaluated on every action."
+    },
+    {
+      "experiment_id": "EXP-04",
+      "scenario_title": "Element Interception by Overlays & Visual Layers",
+      "selenium": {
+        "framework": "Selenium WebDriver",
+        "experiment_id": "EXP-04",
+        "test_name": "test_overlay_blocking_click_remedied",
+        "status": "failed",
+        "duration_ms": 729.0,
+        "synchronization_mechanism": "Explicit wait_for_invisibility of modal/overlay",
+        "actionability_handling": "Throws ElementClickInterceptedException if visual layer covers element",
+        "diagnostics_captured": [
+          "Screenshot",
+          "DOM Snapshot",
+          "Browser Logs",
+          "Execution Metadata"
+        ],
+        "isolation_type": "Process-level (Clean WebDriver instance per test)"
+      },
+      "playwright": {
+        "framework": "Playwright Test",
+        "experiment_id": "EXP-04",
+        "test_name": "Playwright auto-waits for overlay to disappear before clicking",
+        "status": "passed",
+        "duration_ms": 1509.0,
+        "synchronization_mechanism": "Auto-waiting click checks hit-target element",
+        "actionability_handling": "Pauses click until element is topmost hit-target",
+        "diagnostics_captured": [
+          "PW Trace (ZIP)",
+          "Failure Screenshot",
+          "Video recording"
+        ],
+        "isolation_type": "Context-level (Ephemeral BrowserContext)"
+      },
+      "latency_delta_ms": 780.0,
+      "faster_framework": "Selenium",
+      "architectural_contrast": "Selenium requires manual overlay invisibility synchronization; Playwright verifies hit-target coordinates via CDP hit-testing."
+    },
+    {
+      "experiment_id": "EXP-06",
+      "scenario_title": "Shadow DOM Encapsulation & Traversal",
+      "selenium": {
+        "framework": "Selenium WebDriver",
+        "experiment_id": "EXP-06",
+        "test_name": "test_shadow_dom_access_modern_api",
+        "status": "failed",
+        "duration_ms": 587.49,
+        "synchronization_mechanism": "element.shadow_root.find_element() (W3C Modern API)",
+        "actionability_handling": "Requires explicit step-by-step shadow root traversal",
+        "diagnostics_captured": [
+          "Screenshot",
+          "DOM Snapshot",
+          "Browser Logs",
+          "Execution Metadata"
+        ],
+        "isolation_type": "Process-level (Clean WebDriver instance per test)"
+      },
+      "playwright": {
+        "framework": "Playwright Test",
+        "experiment_id": "EXP-06",
+        "test_name": "Playwright CSS locators pierce open shadow roots transparently",
+        "status": "passed",
+        "duration_ms": 130.0,
+        "synchronization_mechanism": "Transparent CSS piercing (page.locator('parent child'))",
+        "actionability_handling": "CSS selector engine pierces open shadow trees by default",
+        "diagnostics_captured": [
+          "PW Trace (ZIP)",
+          "Failure Screenshot",
+          "Video recording"
+        ],
+        "isolation_type": "Context-level (Ephemeral BrowserContext)"
+      },
+      "latency_delta_ms": 457.49,
+      "faster_framework": "Playwright",
+      "architectural_contrast": "Selenium requires explicit navigation into each ShadowRoot object; Playwright locators cross shadow DOM boundaries seamlessly."
+    },
+    {
+      "experiment_id": "EXP-ISO",
+      "scenario_title": "Browser Isolation & Context Startup Latency",
+      "selenium": {
+        "framework": "Selenium WebDriver",
+        "experiment_id": "EXP-ISO",
+        "test_name": "test_parallel_worker_storage_isolation",
+        "status": "passed",
+        "duration_ms": 2140.47,
+        "synchronization_mechanism": "Full browser process instantiation via DriverFactory",
+        "actionability_handling": "Complete OS process isolation (ChromeDriver + Chrome binary)",
+        "diagnostics_captured": [
+          "Screenshot",
+          "DOM Snapshot",
+          "Browser Logs",
+          "Execution Metadata"
+        ],
+        "isolation_type": "Process-level (Clean WebDriver instance per test)"
+      },
+      "playwright": {
+        "framework": "Playwright Test",
+        "experiment_id": "EXP-ISO",
+        "test_name": "BrowserContext ephemeral isolation speed benchmark",
+        "status": "passed",
+        "duration_ms": 466.0,
+        "synchronization_mechanism": "browser.newContext() ephemeral session creation",
+        "actionability_handling": "In-memory BrowserContext isolation sharing single browser process",
+        "diagnostics_captured": [
+          "PW Trace (ZIP)",
+          "Failure Screenshot",
+          "Video recording"
+        ],
+        "isolation_type": "Context-level (Ephemeral BrowserContext)"
+      },
+      "latency_delta_ms": 1674.47,
+      "faster_framework": "Playwright",
+      "architectural_contrast": "Selenium creates a full OS browser process per test (~300ms); Playwright creates ephemeral isolated contexts in ~50ms."
+    }
+  ]
+}

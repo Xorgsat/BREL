@@ -8,7 +8,6 @@ from __future__ import annotations
 import logging
 import os
 from pathlib import Path
-import uuid
 import pytest
 from selenium.webdriver.remote.webdriver import WebDriver
 
@@ -82,18 +81,40 @@ def pytest_sessionfinish(session: pytest.Session, exitstatus: int) -> None:
 
 @pytest.fixture(scope="session")
 def controlled_server():
-    """Ensure controlled testbed server is healthy and return base URL."""
+    """
+    Ensure controlled testbed server is healthy and return base URL.
+
+    Strategy (ADR-006):
+    - On the controller process, the server is started in pytest_sessionstart BEFORE
+      workers fork, so it should already be healthy by the time this fixture runs.
+    - On xdist worker processes (``workerinput`` is present), the server is a shared
+      subprocess — workers just poll until it is healthy.
+    - The retry window is intentionally generous (15 s) to cover worker startup races
+      and slow CI environments.
+    """
     base_url = f"http://{settings.CONTROLLED_APP_HOST}:{settings.CONTROLLED_APP_PORT}"
-    start_t = time.time()
-    while time.time() - start_t < 6.0:
+
+    # Extended retry with exponential back-off to handle worker-startup races.
+    deadline = time.time() + 15.0
+    sleep_interval = 0.1
+    while time.time() < deadline:
         try:
-            resp = requests.get(f"{base_url}/api/health", timeout=0.5)
+            resp = requests.get(f"{base_url}/api/health", timeout=1.0)
             if resp.status_code == 200:
+                logger.info("controlled_server fixture: server healthy at %s", base_url)
                 break
         except Exception:
-            time.sleep(0.1)
+            pass
+        time.sleep(sleep_interval)
+        sleep_interval = min(sleep_interval * 1.5, 1.0)  # back-off, cap at 1 s
     else:
-        # Fallback if not pre-started
+        # Last-resort self-start: this worker will own the server for its session.
+        # ControlledServerManager.start() is idempotent — if the port is already open
+        # it returns immediately without spawning a duplicate process.
+        logger.warning(
+            "controlled_server fixture: health check timed out after 15 s — "
+            "attempting self-start fallback."
+        )
         server_mgr = ControlledServerManager(
             host=settings.CONTROLLED_APP_HOST,
             port=settings.CONTROLLED_APP_PORT,
@@ -194,6 +215,28 @@ def file_mgr() -> type[FileManager]:
 @pytest.fixture(scope="function")
 def shadow_mgr(driver: WebDriver) -> ShadowDomManager:
     return ShadowDomManager(driver)
+
+
+def pytest_collection_modifyitems(items: list[pytest.Item]) -> None:
+    """
+    Auto-mark any test that depends on ``internet_app_url`` or ``uitap_app_url``
+    as ``network_sensitive``.
+
+    Rationale (ADR-006 / ADR-004):
+      External public demo applications (Heroku, Azure) are susceptible to
+      renderer-timeout crashes when multiple headless Chrome instances
+      simultaneously hit the same remote host under parallel pytest-xdist
+      workers.  Auto-marking at collection time keeps test modules free of
+      boilerplate repetition and makes the CI split (parallel vs sequential)
+      fully automatic.
+    """
+    external_fixture_names = {"internet_app_url", "uitap_app_url"}
+    network_sensitive_mark = pytest.mark.network_sensitive
+    for item in items:
+        if hasattr(item, "fixturenames") and external_fixture_names.intersection(
+            item.fixturenames
+        ):
+            item.add_marker(network_sensitive_mark, append=False)
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)

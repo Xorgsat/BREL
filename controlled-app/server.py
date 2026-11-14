@@ -37,7 +37,7 @@ class ControlledServerManager:
 
     def start(self, timeout: float = 6.0) -> str:
         base_url = f"http://{self.host}:{self.port}"
-        
+
         # If server is already running and healthy, reuse it immediately
         try:
             resp = requests.get(f"{base_url}/api/health", timeout=0.5)

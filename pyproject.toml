@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "browser-reliability-engineering-lab"
-version = "0.1.0"
+version = "1.0.0"
 description = "Browser Reliability Engineering Lab (BREL) - Advanced Browser Automation & Flakiness Research"
 authors = [
     { name = "Senior SDET / Reliability Engineering Specialist" }
@@ -27,3 +27,22 @@ dev = [
     "pytest-cov>=4.1.0",
     "ruff>=0.3.0",
 ]
+
+[tool.setuptools.packages.find]
+include = ["selenium_lab*", "controlled_app*", "reliability_engine*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W"]
+ignore = [
+    "E501",  # line length handled by black/formatter style
+    "E402",  # module level import order
+    "W291",  # trailing whitespace used intentionally for Markdown line breaks
+    "F403",  # star imports in test helpers if any
+    "F841",  # local variable assigned but never used in benchmarks
+]
+
+

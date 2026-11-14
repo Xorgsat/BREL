@@ -10,9 +10,9 @@
 
 | Worker Count | Execution Duration (s) | Speedup Ratio | Status | Memory (MB) |
 |---|---|---|---|---|
-| **1 Worker** | 4.37s | **1.0x** | PASSED | 19.6 MB |
-| **2 Workers** | 2.66s | **1.64x** | PASSED | 19.6 MB |
-| **3 Workers** | 2.23s | **1.96x** | PASSED | 14.8 MB |
+| **1 Worker** | 3.84s | **1.0x** | PASSED | 14.4 MB |
+| **2 Workers** | 2.71s | **1.42x** | PASSED | 15.3 MB |
+| **3 Workers** | 2.29s | **1.68x** | PASSED | 15.2 MB |
 
 ---
 

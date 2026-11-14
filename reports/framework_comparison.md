@@ -1,10 +1,10 @@
 # BREL Cross-Framework Comparative Engineering Analysis
 ## Selenium WebDriver (Python) vs. Playwright (TypeScript)
 
-**Report ID:** `COMP_20261114_121225`  
-**Generated At:** `2026-11-14T12:12:25.050431+00:00`  
+**Report ID:** `COMP_20261114_153139`  
+**Generated At:** `2026-11-14T15:31:39.688720+00:00`  
 **Scenarios Evaluated:** 6  
-**Overall Framework Speedup Ratio:** **0.5x** (Selenium faster)
+**Overall Framework Speedup Ratio:** **0.53x** (Selenium faster)
 
 ---
 
@@ -25,13 +25,13 @@
 
 | Experiment | Scenario Title | Selenium Latency (ms) | Playwright Latency (ms) | Faster Engine | Latency Delta |
 |---|---|---|---|---|---|
-| `EXP-01` | Dynamic DOM Injection & Rendering | 692.43 ms | 1648.0 ms | **Selenium** | 955.57 ms |
-| `EXP-02` | Asynchronous State Transitions & Actionability | 728.67 ms | 5838.0 ms | **Selenium** | 5109.33 ms |
-| `EXP-03` | DOM Node Replacement & Stale Reference Resilience | 735.34 ms | 935.0 ms | **Selenium** | 199.66 ms |
-| `EXP-04` | Element Interception by Overlays & Visual Layers | 718.93 ms | 1464.0 ms | **Selenium** | 745.07 ms |
-| `EXP-06` | Shadow DOM Encapsulation & Traversal | 714.87 ms | 120.0 ms | **Playwright** | 594.87 ms |
-| `EXP-ISO` | Browser Isolation & Context Startup Latency | 1646.72 ms | 478.0 ms | **Playwright** | 1168.72 ms |
-| **TOTAL** | **Aggregate Execution Duration** | **5236.96 ms** | **10483.0 ms** | **Selenium** | **0.5x Speedup** |
+| `EXP-01` | Dynamic DOM Injection & Rendering | 675.04 ms | 1664.0 ms | **Selenium** | 988.96 ms |
+| `EXP-02` | Asynchronous State Transitions & Actionability | 729.19 ms | 5751.0 ms | **Selenium** | 5021.81 ms |
+| `EXP-03` | DOM Node Replacement & Stale Reference Resilience | 725.02 ms | 976.0 ms | **Selenium** | 250.98 ms |
+| `EXP-04` | Element Interception by Overlays & Visual Layers | 729.0 ms | 1509.0 ms | **Selenium** | 780.0 ms |
+| `EXP-06` | Shadow DOM Encapsulation & Traversal | 587.49 ms | 130.0 ms | **Playwright** | 457.49 ms |
+| `EXP-ISO` | Browser Isolation & Context Startup Latency | 2140.47 ms | 466.0 ms | **Playwright** | 1674.47 ms |
+| **TOTAL** | **Aggregate Execution Duration** | **5586.21 ms** | **10496.0 ms** | **Selenium** | **0.53x Speedup** |
 
 ---
 

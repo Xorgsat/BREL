@@ -11,7 +11,6 @@ import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 
-from selenium_lab.config.settings import settings
 from selenium_lab.core.wait_manager import WaitManager
 from selenium_lab.diagnostics.failure_collector import FailureCollector
 

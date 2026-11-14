@@ -40,7 +40,8 @@ jobs:
       - name: Install uv and backend dependencies
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
-          uv venv
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+          uv venv --python 3.12
           uv pip install -e ".[dev]"
 
       - name: Install npm dependencies

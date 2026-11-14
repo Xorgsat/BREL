@@ -7,7 +7,6 @@ Enforces ADR-002: Zero arbitrary sleeps, zero implicit waits.
 from __future__ import annotations
 
 import logging
-import time
 from typing import Any, Callable, List, Optional, Tuple, Union
 
 from selenium.common.exceptions import (

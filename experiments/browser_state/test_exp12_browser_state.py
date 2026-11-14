@@ -7,7 +7,6 @@ history navigation transitions (back, forward, refresh), and state leakage preve
 from __future__ import annotations
 
 import pytest
-from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 
 from selenium_lab.core.wait_manager import WaitManager

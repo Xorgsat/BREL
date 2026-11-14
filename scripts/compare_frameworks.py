@@ -39,7 +39,7 @@ def main():
         f.write(markdown_content)
 
     print("\n" + "=" * 60)
-    print(f"Comparison Analysis Complete!")
+    print("Comparison Analysis Complete!")
     print(f"Total Scenarios Compared: {report.total_scenarios_compared}")
     print(f"Selenium Aggregate Time:  {report.selenium_total_duration_ms} ms")
     print(f"Playwright Aggregate Time: {report.playwright_total_duration_ms} ms")

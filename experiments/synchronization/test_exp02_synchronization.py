@@ -11,10 +11,8 @@ from __future__ import annotations
 
 import time
 import pytest
-from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
-from selenium.webdriver.support.ui import WebDriverWait
 
 from selenium_lab.core.wait_manager import WaitManager
 
@@ -91,15 +89,17 @@ def test_exp02_state_based_synchronization_dynamic_controls(
     enable_btn = wait.wait_for_clickable(enable_btn_locator, timeout=5.0)
     enable_btn.click()
 
-    # Wait for loading spinner to disappear
-    wait.wait_for_invisibility((By.CSS_SELECTOR, "#input-example #loading"), timeout=10.0)
-
-    # Wait for element to become actionable/enabled
+    # Synchronize on the target state condition: wait for input to become enabled
+    # Using 10.0s timeout to accommodate external Heroku network latency
     wait.wait_for_custom_condition(
         lambda d: d.find_element(*input_locator).is_enabled(),
-        timeout=5.0,
+        timeout=10.0,
         description="input to become enabled",
     )
+
+    # Optional confirmation message verification
+    message = wait.wait_for_visibility((By.ID, "message"), timeout=5.0)
+    assert "It's enabled!" in message.text
 
     # Now type text successfully
     input_el = driver.find_element(*input_locator)

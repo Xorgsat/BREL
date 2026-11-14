@@ -7,7 +7,6 @@ context switching to alert instances, and resulting DOM state verification.
 from __future__ import annotations
 
 import pytest
-from selenium.common.exceptions import NoAlertPresentException, TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 

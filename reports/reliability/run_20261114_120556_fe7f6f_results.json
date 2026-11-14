@@ -1,0 +1,139 @@
+{
+  "run_id": "run_20261114_120556_fe7f6f",
+  "test_target": "experiments/dynamic_dom/test_exp01_dynamic_dom.py::test_exp01_explicit_wait_remediation",
+  "browser": "chrome",
+  "iterations": 10,
+  "random_seed": 42,
+  "timestamp_utc": "2026-11-14T12:06:16.131131+00:00",
+  "analysis": {
+    "test_id": "experiments/dynamic_dom/test_exp01_dynamic_dom.py::test_exp01_explicit_wait_remediation",
+    "total_runs": 10,
+    "first_attempt_passed": 10,
+    "first_attempt_failed": 0,
+    "retry_passed": 0,
+    "final_passed": 10,
+    "final_failed": 0,
+    "verdict": "CLEAN_PASS",
+    "is_flaky": false,
+    "failure_distribution": {},
+    "durations_ms": [
+      2269.19,
+      1863.92,
+      1865.96,
+      2057.37,
+      1852.13,
+      2066.08,
+      1750.46,
+      2051.68,
+      1740.79,
+      2063.32
+    ]
+  },
+  "metrics": {
+    "total_executions": 10,
+    "first_attempt_pass_rate_pct": 100.0,
+    "failure_rate_pct": 0.0,
+    "retry_recovery_rate_pct": 0.0,
+    "final_pass_rate_pct": 100.0,
+    "flakiness_rate_pct": 0.0,
+    "flaky_test_count": 0,
+    "total_unique_tests": 1,
+    "latency": {
+      "mean_ms": 1958.09,
+      "median_ms": 1958.82,
+      "p90_ms": 2086.39,
+      "p95_ms": 2177.79,
+      "min_ms": 1740.79,
+      "max_ms": 2269.19
+    },
+    "pass_rate_ci_95": {
+      "lower": 72.25,
+      "upper": 100.0,
+      "confidence_level": 0.95
+    },
+    "rule_of_three_upper_bound_pct": 30.0,
+    "statistical_disclaimer": "Calculated across sample N=10. 95% Wilson confidence interval for first-attempt pass rate: [72.25%, 100.0%]. Rule of Three applies: zero failures in N=10 implies true failure rate p < 30.0% (not 0.00%)."
+  },
+  "iterations_data": [
+    {
+      "iteration": 1,
+      "passed": true,
+      "duration_ms": 2269.19,
+      "return_code": 0,
+      "failure_category": null,
+      "error_snippet": null
+    },
+    {
+      "iteration": 2,
+      "passed": true,
+      "duration_ms": 1863.92,
+      "return_code": 0,
+      "failure_category": null,
+      "error_snippet": null
+    },
+    {
+      "iteration": 3,
+      "passed": true,
+      "duration_ms": 1865.96,
+      "return_code": 0,
+      "failure_category": null,
+      "error_snippet": null
+    },
+    {
+      "iteration": 4,
+      "passed": true,
+      "duration_ms": 2057.37,
+      "return_code": 0,
+      "failure_category": null,
+      "error_snippet": null
+    },
+    {
+      "iteration": 5,
+      "passed": true,
+      "duration_ms": 1852.13,
+      "return_code": 0,
+      "failure_category": null,
+      "error_snippet": null
+    },
+    {
+      "iteration": 6,
+      "passed": true,
+      "duration_ms": 2066.08,
+      "return_code": 0,
+      "failure_category": null,
+      "error_snippet": null
+    },
+    {
+      "iteration": 7,
+      "passed": true,
+      "duration_ms": 1750.46,
+      "return_code": 0,
+      "failure_category": null,
+      "error_snippet": null
+    },
+    {
+      "iteration": 8,
+      "passed": true,
+      "duration_ms": 2051.68,
+      "return_code": 0,
+      "failure_category": null,
+      "error_snippet": null
+    },
+    {
+      "iteration": 9,
+      "passed": true,
+      "duration_ms": 1740.79,
+      "return_code": 0,
+      "failure_category": null,
+      "error_snippet": null
+    },
+    {
+      "iteration": 10,
+      "passed": true,
+      "duration_ms": 2063.32,
+      "return_code": 0,
+      "failure_category": null,
+      "error_snippet": null
+    }
+  ]
+}

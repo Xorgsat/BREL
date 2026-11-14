@@ -43,6 +43,8 @@ playwright/.cache/
 # Environment and local configs
 .env
 .env.local
+manual_commands.md
+manual_run.sh
 
 # Operating System
 .DS_Store

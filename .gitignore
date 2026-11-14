@@ -48,8 +48,11 @@ playwright/.cache/
 .DS_Store
 Thumbs.db
 
-# Diagnostic Artifacts and Reports (preserve directory structures with .gitkeep)
+# Diagnostic Artifacts and Reports (preserve directory structures with .gitkeep and keep markdown reports)
 artifacts/*
 !artifacts/.gitkeep
 reports/*
 !reports/.gitkeep
+!reports/*/
+!reports/*.md
+!reports/**/*.md

@@ -7,6 +7,8 @@ from __future__ import annotations
 
 import logging
 import socket
+import subprocess
+import sys
 import threading
 import time
 from typing import Optional
@@ -29,35 +31,47 @@ class ControlledServerManager:
     def __init__(self, host: str = "127.0.0.1", port: int = 8000):
         self.host = host
         self.port = port
+        self.proc: Optional[subprocess.Popen] = None
         self.server: Optional[uvicorn.Server] = None
         self.thread: Optional[threading.Thread] = None
 
-    def start(self, timeout: float = 5.0) -> str:
+    def start(self, timeout: float = 6.0) -> str:
         base_url = f"http://{self.host}:{self.port}"
-        # Check if already running
-        if is_port_in_use(self.host, self.port):
-            try:
-                resp = requests.get(f"{base_url}/api/health", timeout=1.0)
-                if resp.status_code == 200:
-                    logger.info(f"Controlled testbed already active on {base_url}")
-                    return base_url
-            except Exception:
-                pass
+        
+        # If server is already running and healthy, reuse it immediately
+        try:
+            resp = requests.get(f"{base_url}/api/health", timeout=0.5)
+            if resp.status_code == 200:
+                logger.info(f"Controlled testbed already active on {base_url}")
+                return base_url
+        except Exception:
+            pass
 
-        logger.info(f"Starting controlled testbed server on {base_url}...")
-        config = uvicorn.Config(
-            "controlled_app.app.main:app",
-            host=self.host,
-            port=self.port,
-            log_level="warning",
-        )
-        self.server = uvicorn.Server(config)
-        self.thread = threading.Thread(target=self.server.run, daemon=True)
-        self.thread.start()
+        # Launch via subprocess so it runs independently across pytest-xdist worker processes
+        logger.info(f"Starting controlled testbed server on {base_url} via subprocess...")
+        try:
+            self.proc = subprocess.Popen(
+                [
+                    sys.executable,
+                    "-m",
+                    "uvicorn",
+                    "controlled_app.app.main:app",
+                    "--host",
+                    self.host,
+                    "--port",
+                    str(self.port),
+                    "--log-level",
+                    "warning",
+                ],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+            )
+        except Exception as e:
+            logger.warning(f"Could not launch uvicorn subprocess: {e}")
 
-        # Wait for healthcheck
-        start_time = time.time()
-        while time.time() - start_time < timeout:
+        # Wait for healthcheck to respond
+        start_wait = time.time()
+        while time.time() - start_wait < timeout:
             try:
                 resp = requests.get(f"{base_url}/api/health", timeout=0.5)
                 if resp.status_code == 200:
@@ -69,6 +83,18 @@ class ControlledServerManager:
         raise TimeoutError(f"Failed to start controlled testbed on {base_url} within {timeout}s")
 
     def stop(self) -> None:
+        if self.proc:
+            logger.info("Stopping controlled testbed server subprocess...")
+            try:
+                self.proc.terminate()
+                self.proc.wait(timeout=2.0)
+            except Exception:
+                try:
+                    self.proc.kill()
+                except Exception:
+                    pass
+            self.proc = None
+
         if self.server:
             logger.info("Stopping controlled testbed server...")
             self.server.should_exit = True

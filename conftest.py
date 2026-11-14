@@ -54,16 +54,53 @@ def pytest_addoption(parser: pytest.Parser) -> None:
     )
 
 
+import time
+import requests
+
+
+def pytest_sessionstart(session: pytest.Session) -> None:
+    """Pre-start controlled app server on controller process before xdist workers fork."""
+    if not hasattr(session.config, "workerinput"):
+        try:
+            server_mgr = ControlledServerManager(
+                host=settings.CONTROLLED_APP_HOST,
+                port=settings.CONTROLLED_APP_PORT,
+            )
+            server_mgr.start()
+            session.config._brel_server_mgr = server_mgr
+        except Exception as e:
+            logger.warning(f"Could not pre-start controlled server in sessionstart: {e}")
+
+
+def pytest_sessionfinish(session: pytest.Session, exitstatus: int) -> None:
+    """Stop controlled app server on controller node after all workers finish."""
+    if not hasattr(session.config, "workerinput"):
+        server_mgr = getattr(session.config, "_brel_server_mgr", None)
+        if server_mgr:
+            server_mgr.stop()
+
+
 @pytest.fixture(scope="session")
 def controlled_server():
-    """Start local controlled testbed server for the duration of the test session."""
-    server_mgr = ControlledServerManager(
-        host=settings.CONTROLLED_APP_HOST,
-        port=settings.CONTROLLED_APP_PORT,
-    )
-    base_url = server_mgr.start()
+    """Ensure controlled testbed server is healthy and return base URL."""
+    base_url = f"http://{settings.CONTROLLED_APP_HOST}:{settings.CONTROLLED_APP_PORT}"
+    start_t = time.time()
+    while time.time() - start_t < 6.0:
+        try:
+            resp = requests.get(f"{base_url}/api/health", timeout=0.5)
+            if resp.status_code == 200:
+                break
+        except Exception:
+            time.sleep(0.1)
+    else:
+        # Fallback if not pre-started
+        server_mgr = ControlledServerManager(
+            host=settings.CONTROLLED_APP_HOST,
+            port=settings.CONTROLLED_APP_PORT,
+        )
+        base_url = server_mgr.start()
+
     yield base_url
-    server_mgr.stop()
 
 
 @pytest.fixture(scope="session")

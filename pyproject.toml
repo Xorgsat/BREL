@@ -27,25 +27,3 @@ dev = [
     "pytest-cov>=4.1.0",
     "ruff>=0.3.0",
 ]
-
-[tool.pytest.ini_options]
-minversion = "8.0"
-addopts = "-ra -q --strict-markers"
-testpaths = [
-    "experiments",
-    "selenium-lab",
-]
-python_files = ["test_*.py"]
-python_classes = ["Test*"]
-python_functions = ["test_*"]
-markers = [
-    "smoke: Quick validation tests for framework and environment health",
-    "experiment: Reliability lab experiments",
-    "flaky_repro: Controlled flaky test reproduction scenarios",
-    "public_app: Tests requiring access to external demo applications",
-    "controlled_app: Tests executed against deterministic local controlled application",
-    "slow: Tests with intentional long delays or high iteration counts",
-]
-filterwarnings = [
-    "ignore::DeprecationWarning",
-]

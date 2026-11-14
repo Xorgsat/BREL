@@ -1,14 +1,14 @@
 # Browser Reliability Engineering Lab (BREL)
 
-[![Selenium CI](https://github.com/YOUR_GITHUB_USERNAME/BREL/actions/workflows/selenium-tests.yml/badge.svg)](https://github.com/YOUR_GITHUB_USERNAME/BREL/actions/workflows/selenium-tests.yml)
-[![Playwright CI](https://github.com/YOUR_GITHUB_USERNAME/BREL/actions/workflows/playwright-tests.yml/badge.svg)](https://github.com/YOUR_GITHUB_USERNAME/BREL/actions/workflows/playwright-tests.yml)
-[![Browser Matrix](https://github.com/YOUR_GITHUB_USERNAME/BREL/actions/workflows/browser-matrix.yml/badge.svg)](https://github.com/YOUR_GITHUB_USERNAME/BREL/actions/workflows/browser-matrix.yml)
+[![Selenium CI](https://github.com/Xorgsat/BREL/actions/workflows/selenium-tests.yml/badge.svg)](https://github.com/Xorgsat/BREL/actions/workflows/selenium-tests.yml)
+[![Playwright CI](https://github.com/Xorgsat/BREL/actions/workflows/playwright-tests.yml/badge.svg)](https://github.com/Xorgsat/BREL/actions/workflows/playwright-tests.yml)
+[![Browser Matrix](https://github.com/Xorgsat/BREL/actions/workflows/browser-matrix.yml/badge.svg)](https://github.com/Xorgsat/BREL/actions/workflows/browser-matrix.yml)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/)
 [![Selenium WebDriver 4](https://img.shields.io/badge/selenium-4.52.0-green.svg)](https://www.selenium.dev/)
 [![Playwright 1.65](https://img.shields.io/badge/playwright-1.65.1-orange.svg)](https://playwright.dev/)
 [![pytest 9.2](https://img.shields.io/badge/pytest-9.2.0-yellow.svg)](https://docs.pytest.org/)
 [![TypeScript 5.8](https://img.shields.io/badge/typescript-5.8-blue.svg)](https://www.typescriptlang.org/)
-[![Version](https://img.shields.io/badge/version-1.0.0-brightgreen.svg)](https://github.com/YOUR_GITHUB_USERNAME/BREL/releases/tag/v1.0.0)
+[![Version](https://img.shields.io/badge/version-1.0.0-brightgreen.svg)](https://github.com/Xorgsat/BREL/releases/tag/v1.0.0)
 [![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
 
 > A production-grade test infrastructure laboratory designed to investigate, measure, diagnose, and systematically eliminate browser automation failure modes and flakiness across asynchronous web applications.
@@ -245,8 +245,8 @@ Key architectural decisions are documented in [`docs/architecture/adr/`](file://
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/brel.git
-cd brel
+git clone https://github.com/Xorgsat/BREL.git
+cd BREL
 
 # Install all Python + Node.js dependencies in one shot
 make install

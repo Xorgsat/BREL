@@ -36,10 +36,16 @@ class BrowserConfig:
         # Container & sandboxing flags for reliability
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
-        options.add_argument("--disable-gpu")
+        # Note: --disable-gpu causes software rendering hang on macOS arm64; only use on Linux
+        import platform
+        if platform.system() == "Linux":
+            options.add_argument("--disable-gpu")
         options.add_argument("--window-size=1920,1080")
         options.add_argument("--ignore-certificate-errors")
         options.add_argument("--disable-search-engine-choice-screen")
+
+        # Set eager page load strategy to avoid hanging on slow 3rd-party assets
+        options.page_load_strategy = "eager"
 
         # Logging preferences for console error extraction
         options.set_capability("goog:loggingPrefs", {"browser": "ALL", "performance": "ALL"})

@@ -24,7 +24,7 @@ class Settings:
 
     # Target Applications
     INTERNET_APP_URL: str = os.getenv("INTERNET_APP_URL", "https://the-internet.herokuapp.com").rstrip("/")
-    UITAP_APP_URL: str = os.getenv("UITAP_APP_URL", "http://uitestingplayground.com").rstrip("/")
+    UITAP_APP_URL: str = os.getenv("UITAP_APP_URL", "https://uitestingplayground.com").rstrip("/")
     CONTROLLED_APP_URL: str = os.getenv("CONTROLLED_APP_URL", "http://127.0.0.1:8000").rstrip("/")
 
     # Controlled Application Settings

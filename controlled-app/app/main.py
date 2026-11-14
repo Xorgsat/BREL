@@ -159,14 +159,14 @@ async def race_condition(race_window_ms: int = Query(default=100)):
         <div id="race-status">Ready</div>
         <div id="final-state">NONE</div>
         <script>
-            let listenerAttached = false;
+            window.listenerAttached = false;
             // Deliberately delay event handler binding or state commitment
             setTimeout(() => {{
-                listenerAttached = true;
+                window.listenerAttached = true;
             }}, {race_window_ms});
 
             function triggerRace() {{
-                if (!listenerAttached) {{
+                if (!window.listenerAttached) {{
                     document.getElementById('race-status').innerText = 'RACE_LOST_CLICK_IGNORED';
                     document.getElementById('final-state').innerText = 'FAILED_EARLY_INTERACTION';
                 }} else {{
@@ -231,6 +231,13 @@ async def frames():
     </body>
     </html>
     """
+
+
+@app.get("/scenarios/download-file")
+async def download_file(filename: str = Query(default="brel_specimen.txt")):
+    content = f"BREL Download Verification Test Payload - Filename: {filename}\n"
+    headers = {"Content-Disposition": f'attachment; filename="{filename}"'}
+    return Response(content=content, media_type="text/plain", headers=headers)
 
 
 @app.get("/api/data")

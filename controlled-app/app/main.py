@@ -207,6 +207,19 @@ async def shadow_dom():
     """
 
 
+@app.get("/scenarios/child-frame", response_class=HTMLResponse)
+async def child_frame():
+    return """<!DOCTYPE html>
+    <html>
+        <head><title>Child Frame</title></head>
+        <body style="background: #faf5ff; font-family: sans-serif; padding: 20px;">
+            <h3 id="frame-heading">Inside Child Frame Document</h3>
+            <button id="frame-action-btn" onclick="this.innerText='Clicked in Frame'">Click Inside Frame</button>
+        </body>
+    </html>
+    """
+
+
 @app.get("/scenarios/frames", response_class=HTMLResponse)
 async def frames():
     return """<!DOCTYPE html>
@@ -214,14 +227,7 @@ async def frames():
     <head><title>Frames Test</title></head>
     <body>
         <h2>Nested Frame Isolation Experiment</h2>
-        <iframe id="child-frame" srcdoc="
-            <html>
-                <body style='background: #faf5ff;'>
-                    <h3 id='frame-heading'>Inside Child Frame Document</h3>
-                    <button id='frame-action-btn' onclick='this.innerText=\"Clicked in Frame\"'>Click Inside Frame</button>
-                </body>
-            </html>
-        " width="500" height="250"></iframe>
+        <iframe id="child-frame" src="/scenarios/child-frame" width="500" height="250"></iframe>
     </body>
     </html>
     """

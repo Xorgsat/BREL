@@ -1,0 +1,64 @@
+name: Playwright Comparative Suite
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'playwright-lab/**'
+      - 'controlled-app/**'
+      - 'playwright.config.ts'
+      - 'package.json'
+      - '.github/workflows/playwright-tests.yml'
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: playwright-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  playwright-tests:
+    name: Playwright Comparative Tests (Chromium)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Set up Python 3.12 (Controlled App Testbed)
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install uv and backend dependencies
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          uv venv
+          uv pip install -e ".[dev]"
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers with OS Dependencies
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Playwright Comparative Suite
+        run: npx playwright test
+
+      - name: Upload Playwright Report & Traces
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-test-artifacts
+          path: |
+            reports/playwright-report/
+            reports/playwright-results.json
+            test-results/
+          retention-days: 14

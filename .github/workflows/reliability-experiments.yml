@@ -1,0 +1,88 @@
+name: Reliability Repeatability Benchmarks
+
+on:
+  schedule:
+    # Run weekly every Monday at 02:00 UTC
+    - cron: '0 2 * * 1'
+  workflow_dispatch:
+    inputs:
+      test_target:
+        description: 'Test target path or file to benchmark'
+        required: true
+        default: 'experiments/dynamic_dom/test_exp01_dynamic_dom.py'
+        type: string
+      iterations:
+        description: 'Number of consecutive repeat iterations (10, 25, 50, 100)'
+        required: true
+        default: '10'
+        type: choice
+        options:
+          - '10'
+          - '25'
+          - '50'
+          - '100'
+      browser:
+        description: 'Target browser engine'
+        required: true
+        default: 'chrome'
+        type: choice
+        options:
+          - 'chrome'
+          - 'firefox'
+
+jobs:
+  repeatability-benchmark:
+    name: Repeatability Benchmark (N=${{ github.event.inputs.iterations || 10 }})
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install uv package manager
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+
+      - name: Install dependencies
+        run: |
+          uv venv
+          uv pip install -e ".[dev]"
+
+      - name: Set up Chrome browser
+        if: ${{ (github.event.inputs.browser || 'chrome') == 'chrome' }}
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
+      - name: Set up Firefox browser
+        if: ${{ github.event.inputs.browser == 'firefox' }}
+        uses: browser-actions/setup-firefox@v1
+        with:
+          firefox-version: latest
+
+      - name: Execute Repeatability Benchmark
+        run: |
+          source .venv/bin/activate
+          TARGET="${{ github.event.inputs.test_target || 'experiments/dynamic_dom/test_exp01_dynamic_dom.py' }}"
+          ITERS="${{ github.event.inputs.iterations || 10 }}"
+          BROWSER="${{ github.event.inputs.browser || 'chrome' }}"
+          python scripts/repeat_experiment.py --target "$TARGET" --iterations "$ITERS" --browser "$BROWSER"
+
+      - name: Generate Consolidated Reliability Reports
+        run: |
+          source .venv/bin/activate
+          python scripts/generate_report.py
+
+      - name: Upload Reliability Reports & Manifests
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reliability-experiment-results
+          path: |
+            reports/reliability/
+            reports/*.md
+          retention-days: 30

@@ -53,6 +53,9 @@ artifacts/*
 !artifacts/.gitkeep
 reports/*
 !reports/.gitkeep
-!reports/*/
 !reports/*.md
-!reports/**/*.md
+!reports/reliability/
+!reports/reliability/*.md
+reports/playwright-report/
+reports/*.json
+reports/**/*.json
